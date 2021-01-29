@@ -18,17 +18,17 @@ shp_peru = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326
 shp_peru_no_lake = gpd_read_file("data/shps/Peru_no_lake.shp").to_crs({"init": "epsg:4326"})
 shp_drainages = gpd_read_file("data/shps/vertientes.shp").to_crs({"init": "epsg:4326"})
 shp_dep = gpd_read_file("data/shps/DEPARTAMENTOS.shp").to_crs({"init": "epsg:4326"})
-shp_SA = gpd_read_file(".data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
+shp_SA = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
 shp_lks = gpd_read_file("data/shps/lago_titicaca_sideteva_puno.shp").to_crs({"init": "epsg:4326"})
 
 
 # gridded
-ia = xr.open_rasterio("./data/observed/aridez/ARIDEZ_INDICE.tif")
+ia = xr.open_rasterio("data/ARIDEZ_ACTUAL/ARIDEZ_INDICE.tif")
 ia = ia.reindex(y=np.arange(-0.039, -18.347, -0.01),
                 x=np.arange(-81.327, -68.653, 0.01), method="nearest")
 ia = ia.where(ia > 0)
 
-ra = xr.open_rasterio("./data/observed/aridez/ARIDEZ_REGIMEN.tif")
+ra = xr.open_rasterio("data/ARIDEZ_ACTUAL/ARIDEZ_REGIMEN.tif")
 ra = ra.reindex(y=np.arange(-0.039, -18.347, -0.01),
                 x=np.arange(-81.327, -68.653, 0.01), method="nearest")
 ra = ra.where(ra > 0)

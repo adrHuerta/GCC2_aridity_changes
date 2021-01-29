@@ -39,3 +39,4 @@ ax.grid(True, linestyle='--', color = "black", alpha = 0.1)
 
 plt.savefig('output/aridity_indice_comparison.png',
             bbox_inches='tight',dpi = 300)
+plt.close()

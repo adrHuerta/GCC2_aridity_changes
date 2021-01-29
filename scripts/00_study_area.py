@@ -15,21 +15,21 @@ shp_peru = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326
 shp_peru_no_lake = gpd_read_file("data/shps/Peru_no_lake.shp").to_crs({"init": "epsg:4326"})
 shp_drainages = gpd_read_file("data/shps/vertientes.shp").to_crs({"init": "epsg:4326"})
 shp_dep = gpd_read_file("data/shps/DEPARTAMENTOS.shp").to_crs({"init": "epsg:4326"})
-shp_SA = gpd_read_file(".data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
+shp_SA = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
 shp_lks = gpd_read_file("data/shps/lago_titicaca_sideteva_puno.shp").to_crs({"init": "epsg:4326"})
 
 # gridded
-pisco_p = xr.open_rasterio("/data/CLIMA_ACTUAL/PPT/PPT_01.tif")
+pisco_p = xr.open_rasterio("data/CLIMA_ACTUAL/PPT/PPT_01.tif")
 pisco_p = pisco_p.reindex(y=np.arange(-0.039, -18.347, -0.01),
                           x=np.arange(-81.327, -68.653, 0.01), method="nearest")
 pisco_p = pisco_p.where(pisco_p > 0)
 
-pisco_tx = xr.open_rasterio("./data/observed/TMAX/TMAX_01.tif")
+pisco_tx = xr.open_rasterio("data/CLIMA_ACTUAL/TMAX/TMAX_01.tif")
 pisco_tx = pisco_tx.reindex(y=np.arange(-0.039, -18.347, -0.01),
                             x=np.arange(-81.327, -68.653, 0.01), method="nearest")
 pisco_tx = pisco_tx.where(pisco_tx > 0)
 
-rs_data = xr.open_rasterio("./data/observed/RS/RS_01.tif")
+rs_data = xr.open_rasterio("data/CLIMA_ACTUAL/RS/RS_01.tif")
 rs_data = rs_data.where(rs_data > 0).\
     reindex(y=np.arange(-0.039, -18.347, -0.01),
             x=np.arange(-81.327, -68.653, 0.01), method="nearest")

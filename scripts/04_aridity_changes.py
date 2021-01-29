@@ -16,7 +16,7 @@ shp_peru = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326
 shp_peru_no_lake = gpd_read_file("data/shps/Peru_no_lake.shp").to_crs({"init": "epsg:4326"})
 shp_drainages = gpd_read_file("data/shps/vertientes.shp").to_crs({"init": "epsg:4326"})
 shp_dep = gpd_read_file("data/shps/DEPARTAMENTOS.shp").to_crs({"init": "epsg:4326"})
-shp_SA = gpd_read_file(".data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
+shp_SA = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"})
 shp_lks = gpd_read_file("data/shps/lago_titicaca_sideteva_puno.shp").to_crs({"init": "epsg:4326"})
 
 
