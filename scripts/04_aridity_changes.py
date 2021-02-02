@@ -3,6 +3,7 @@ import numpy as np
 from geopandas import read_file as gpd_read_file
 
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import seaborn as sns
 
 plt.rcParams["font.family"] = "Arial"
@@ -29,6 +30,9 @@ ra_mpiesm = xr.open_rasterio(path_files + "ARIDEZ_REG_MPIESM.tif")
 ra_mpiesm = ra_hadgem.where(ra_mpiesm > 0)
 ra_acces = xr.open_rasterio(path_files + "ARIDEZ_REG_ACCES.tif")
 ra_acces = ra_acces.where(ra_mpiesm > 0)
+
+## matching coordinates
+Pr_hadgem = ra_hadgem.reindex_like(ra_acces) #to check
 ra_future = xr.concat([ra_hadgem, ra_mpiesm, ra_acces], dim="time")
 
 ra_similar = xr.apply_ufunc(similar_subtypes,

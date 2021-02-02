@@ -3,6 +3,7 @@ import numpy as np
 from geopandas import read_file as gpd_read_file
 
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import seaborn as sns
 
 plt.rcParams["font.family"] = "Arial"
