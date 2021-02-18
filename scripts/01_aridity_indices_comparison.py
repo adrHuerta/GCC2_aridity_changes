@@ -22,8 +22,8 @@ ra = ra.where(ra > 0)
 ia_m = np.ravel(ia.values)
 ra_m = np.ravel(ra.values)
 
-ra_labels = ["Xerico", "Hiper\nÁrido", "Árido", "Semi\nÁrido", "Sub-\nHúmedo", "Húmedo", "Hiper\nHúmedo", "Hídrico", "Hiper\nHídrico"]
-ia_labels = ["Hiper-\narido", "Árido", "Semi-\nárido", "Subhúmedo\nseco", "Subhúmedo\nhúmedo", "Húmedo"]
+ra_labels = ["Xérico", "Hiper\nÁrido", "Árido", "Semi-\nárido", "Sub-\nhúmedo", "Húmedo", "Hiper\nHúmedo", "Hídrico", "Hiper\nHídrico"]
+ia_labels = ["Hiper-\n+árida", "Árida", "Semi-\nárida", "Subhúmeda\nseca", "Subhúmeda\nhúmeda", "Húmeda"]
 
 # figure
 fig, ax = plt.subplots(figsize = (8, 5), dpi = 300)

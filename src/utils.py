@@ -65,21 +65,21 @@ def change_of_RA(present, future):
             value = 7
         elif (present == 8) and (future == 9):#
             value = 8
-        elif (present == 9) and (future == 8):
-            value = 10
-        elif (present == 8) and (future == 7):
-            value = 11
-        elif (present == 7) and (future == 6):
-            value = 12
-        elif (present == 6) and (future == 5):
-            value = 13
-        elif (present == 5) and (future == 4):
-            value = 14
-        elif (present == 4) and (future == 3):
-            value = 15
-        elif (present == 3) and (future == 2):
-            value = 16
         elif (present == 2) and (future == 1):
+            value = 10
+        elif (present == 3) and (future == 2):
+            value = 11
+        elif (present == 4) and (future == 3):
+            value = 12
+        elif (present == 5) and (future == 4):
+            value = 13
+        elif (present == 6) and (future == 5):
+            value = 14
+        elif (present == 7) and (future == 6):
+            value = 15
+        elif (present == 8) and (future == 7):
+            value = 16
+        elif (present == 9) and (future == 8):
             value = 17
         elif (present-future) <= -2:
             value = 0

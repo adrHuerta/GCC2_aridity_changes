@@ -3,12 +3,16 @@ import numpy as np
 from geopandas import read_file as gpd_read_file
 
 import matplotlib.pyplot as plt
+import matplotlib.colors
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import seaborn as sns
 
 plt.rcParams["font.family"] = "Arial"
 sns.set_style("whitegrid")
 sns.set_context("paper", font_scale=1.25, rc={"lines.linewidth": 2})
+
+cmap_c = matplotlib.colors.LinearSegmentedColormap.from_list("", ["royalblue","white","tomato"])
+cmap_c_rev = matplotlib.colors.LinearSegmentedColormap.from_list("", ["tomato","white","royalblue"])
 
 # shps
 shp_peru = gpd_read_file("data/shps/Sudamérica.shp").to_crs({"init": "epsg:4326"}).iloc[11:12]
@@ -58,7 +62,7 @@ Eo_change = xr.concat([(100*(Eo_hadgem - Eo)/Eo), (100*(Eo_acces - Eo)/Eo), (100
 # figure
 fig, (ax, ax1) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(10, 8))
 
-plot_Eo = Eo_change.mean(dim="models").plot(ax = ax, levels = np.arange(-40, 40, 5), cmap='PiYG_r',add_colorbar=False, center = 0)
+plot_Eo = Eo_change.mean(dim="models").plot(ax = ax, levels = np.arange(-40, 45, 5), cmap=cmap_c,add_colorbar=False, center = 0)
 axin = inset_axes(ax, width='4%', height='35%', loc = 'lower left', bbox_to_anchor = (0.05, 0.025, 1 ,1), bbox_transform = ax.transAxes)
 cb = plt.colorbar(plot_Eo, cax=axin, orientation = "vertical", aspect = 5)
 cb.ax.set_ylabel('Cambio de ET$_{o}$ (%)', labelpad=-37, size = 8)
@@ -106,7 +110,7 @@ plt.close()
 
 fig, (ax2, ax3) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(10, 8))
 
-plot_Pr = Pr_change.mean(dim="models").plot(ax = ax2, levels = np.arange(-40, 40, 5), cmap='PiYG',add_colorbar=False, center = 0)
+plot_Pr = Pr_change.mean(dim="models").plot(ax = ax2, levels = np.arange(-40, 45, 5), cmap=cmap_c_rev,add_colorbar=False, center = 0)
 axin = inset_axes(ax2, width='4%', height='35%', loc = 'lower left', bbox_to_anchor = (0.05, 0.025, 1 ,1), bbox_transform = ax2.transAxes)
 cb = plt.colorbar(plot_Pr, cax=axin, orientation = "vertical", aspect = 5)
 cb.ax.set_ylabel('Cambio de P (%)', labelpad=-37, size = 8)

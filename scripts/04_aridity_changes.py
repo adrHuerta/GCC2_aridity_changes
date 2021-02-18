@@ -3,12 +3,22 @@ import numpy as np
 from geopandas import read_file as gpd_read_file
 
 import matplotlib.pyplot as plt
+import matplotlib.colors
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import seaborn as sns
 
 plt.rcParams["font.family"] = "Arial"
 sns.set_style("whitegrid")
 sns.set_context("paper", font_scale=1.25, rc={"lines.linewidth": 2})
+
+cmap_c = matplotlib.colors.LinearSegmentedColormap.from_list("", ["royalblue", "lightgreen","white","gold","tomato"])
+newcmp = cmap_c(np.linspace(0, 1, 17))
+red_c = np.array([255/256, 46/256, 1/256, 1])
+blue_c = np.array([1/256, 0/256, 255/256, 1])
+newcmp = np.vstack((blue_c, newcmp, red_c))
+newcmp = matplotlib.colors.ListedColormap(newcmp)
+cmap_c = matplotlib.colors.LinearSegmentedColormap.from_list("", ["white", "gray","black"])
+
 
 exec(open("src/utils.py").read())
 
@@ -58,7 +68,7 @@ ra_change = xr.apply_ufunc(change_of_RA,
 
 fig, (ax, ax1) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(12, 10))
 
-im = ra_change.plot(ax = ax, cmap = "seismic", levels = np.arange(0, 20), add_colorbar=False, center=9.5)
+im = ra_change.plot(ax = ax, cmap = newcmp, levels = np.arange(0, 20), add_colorbar=False, center=9.5)
 axin = inset_axes(ax, width='5%', height='40%', loc = 'lower left', bbox_to_anchor = (0.06, 0.025, 1 ,1), bbox_transform = ax.transAxes)
 cb = plt.colorbar(im, cax=axin, orientation = "vertical", aspect = 7, ticks = np.arange(0.5, 20, 1))
 cb.ax.set_yticklabels(['->>',
@@ -71,14 +81,14 @@ cb.ax.set_yticklabels(['->>',
                        '7 ->',
                        '8 ->',
                        'NC',
-                       '<- 9',
-                       '<- 8',
-                       '<- 7',
-                       '<- 6',
-                       '<- 5',
-                       '<- 4',
-                       '<- 3',
                        '<- 2',
+                       '<- 3',
+                       '<- 4',
+                       '<- 5',
+                       '<- 6',
+                       '<- 7',
+                       '<- 8',
+                       '<- 9',
                        '<<-'])
 cb.ax.set_ylabel('Cambio en RA', labelpad=-35, size = 8)
 cb.ax.tick_params(labelsize = 6, pad = 1)
@@ -98,7 +108,7 @@ ax.yaxis.set_tick_params(labelsize = 5, pad=-3)
 ax.grid(True, linestyle='--', color = "black", alpha = 0.1)
 
 
-im = ra_similar.plot(ax=ax1, cmap = "YlOrRd", levels = np.arange(0, 4), add_colorbar=False)
+im = ra_similar.plot(ax=ax1, cmap = cmap_c, levels = np.arange(0, 4), add_colorbar=False)
 axin = inset_axes(ax1, width='5%', height='30%', loc = 'lower left', bbox_to_anchor = (0.06, 0.025, 1 ,1), bbox_transform = ax1.transAxes)
 cb = plt.colorbar(im, cax=axin, orientation = "vertical", aspect = 4, ticks = np.arange(0.5, 3, 1))
 cb.ax.set_yticklabels(['CC','V1','V2+'])
