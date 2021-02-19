@@ -37,13 +37,14 @@ path_files = "data/ARIDEZ_FUTURO/"
 ra_hadgem = xr.open_rasterio(path_files + "ARIDEZ_REG_HADGEM.tif")
 ra_hadgem = ra_hadgem.where(ra_hadgem > 0)
 ra_mpiesm = xr.open_rasterio(path_files + "ARIDEZ_REG_MPIESM.tif")
-ra_mpiesm = ra_hadgem.where(ra_mpiesm > 0)
+ra_mpiesm = ra_mpiesm.where(ra_mpiesm > 0)
 ra_acces = xr.open_rasterio(path_files + "ARIDEZ_REG_ACCES.tif")
-ra_acces = ra_acces.where(ra_mpiesm > 0)
+ra_acces = ra_acces.where(ra_acces > 0)
 
 ## matching coordinates
-Pr_hadgem = ra_hadgem.reindex_like(ra_acces) #to check
-ra_future = xr.concat([ra_hadgem, ra_mpiesm, ra_acces], dim="time")
+ra_hadgem = ra_hadgem.reindex_like(ra_acces) #to check
+ra_mpiesm = ra_hadgem.reindex_like(ra_acces) #to check
+ra_future = xr.concat([ra_hadgem,ra_mpiesm, ra_acces], dim="time")
 
 ra_similar = xr.apply_ufunc(similar_subtypes,
                             ra_future,
@@ -66,7 +67,7 @@ ra_change = xr.apply_ufunc(change_of_RA,
                            vectorize=True,
                            output_dtypes=['float64'])
 
-fig, (ax, ax1) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(12, 10))
+fig, (ax1, ax) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(12, 10))
 
 im = ra_change.plot(ax = ax, cmap = newcmp, levels = np.arange(0, 20), add_colorbar=False, center=9.5)
 axin = inset_axes(ax, width='5%', height='40%', loc = 'lower left', bbox_to_anchor = (0.06, 0.025, 1 ,1), bbox_transform = ax.transAxes)
