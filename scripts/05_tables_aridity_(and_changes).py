@@ -24,7 +24,7 @@ ra_present = ra_present.where(ra_present > 0)
 ra_present = np.abs(ra_present - 10)
 ra_present = ra_present.rio.set_crs("epsg:4326")
 
-ra_future = xr.open_rasterio("data/ARIDEZ_FUTURO/ARIDEZ_REG_PROMF.tif")
+ra_future = xr.open_rasterio("data/ARIDEZ_FUTURO/ARIDEZ_REG_PM.tif")
 ra_future = ra_future.where(ra_future > 0)
 ra_future = np.abs(ra_future - 10)
 ra_future = ra_future.rio.set_crs("epsg:4326")

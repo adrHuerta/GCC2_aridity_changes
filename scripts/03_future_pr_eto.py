@@ -62,7 +62,7 @@ Eo_change = xr.concat([(100*(Eo_hadgem - Eo)/Eo), (100*(Eo_acces - Eo)/Eo), (100
 # figure
 fig, (ax, ax1) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(10, 8))
 
-plot_Eo = Eo_change.mean(dim="models").plot(ax = ax, levels = np.arange(-40, 45, 5), cmap=cmap_c,add_colorbar=False, center = 0)
+plot_Eo = Eo_change.mean(dim="models").plot(ax = ax, levels = np.arange(-10, 15, 5), cmap=cmap_c,add_colorbar=False, center = 0)
 axin = inset_axes(ax, width='4%', height='35%', loc = 'lower left', bbox_to_anchor = (0.05, 0.025, 1 ,1), bbox_transform = ax.transAxes)
 cb = plt.colorbar(plot_Eo, cax=axin, orientation = "vertical", aspect = 5)
 cb.ax.set_ylabel('Cambio de ET$_{o}$ (%)', labelpad=-37, size = 8)
@@ -110,7 +110,7 @@ plt.close()
 
 fig, (ax2, ax3) = plt.subplots(ncols=2, sharey=True, sharex=True, gridspec_kw = {'wspace':0, 'hspace':0}, figsize=(10, 8))
 
-plot_Pr = Pr_change.mean(dim="models").plot(ax = ax2, levels = np.arange(-40, 45, 5), cmap=cmap_c_rev,add_colorbar=False, center = 0)
+plot_Pr = Pr_change.mean(dim="models").plot(ax = ax2, levels = np.arange(-30, 35, 5), cmap=cmap_c_rev,add_colorbar=False, center = 0)
 axin = inset_axes(ax2, width='4%', height='35%', loc = 'lower left', bbox_to_anchor = (0.05, 0.025, 1 ,1), bbox_transform = ax2.transAxes)
 cb = plt.colorbar(plot_Pr, cax=axin, orientation = "vertical", aspect = 5)
 cb.ax.set_ylabel('Cambio de P (%)', labelpad=-37, size = 8)

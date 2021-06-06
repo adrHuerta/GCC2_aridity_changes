@@ -34,11 +34,11 @@ shp_lks = gpd_read_file("data/shps/lago_titicaca_sideteva_puno.shp").to_crs({"in
 # Future Aridity (in RA) discordance
 path_files = "data/ARIDEZ_FUTURO/"
 
-ra_hadgem = xr.open_rasterio(path_files + "ARIDEZ_REG_HADGEM.tif")
+ra_hadgem = xr.open_rasterio(path_files + "ARIDEZ_REG_HAD.tif")
 ra_hadgem = ra_hadgem.where(ra_hadgem > 0)
-ra_mpiesm = xr.open_rasterio(path_files + "ARIDEZ_REG_MPIESM.tif")
+ra_mpiesm = xr.open_rasterio(path_files + "ARIDEZ_REG_MPI.tif")
 ra_mpiesm = ra_mpiesm.where(ra_mpiesm > 0)
-ra_acces = xr.open_rasterio(path_files + "ARIDEZ_REG_ACCES.tif")
+ra_acces = xr.open_rasterio(path_files + "ARIDEZ_REG_ACC.tif")
 ra_acces = ra_acces.where(ra_acces > 0)
 
 ## matching coordinates
@@ -53,7 +53,7 @@ ra_similar = xr.apply_ufunc(similar_subtypes,
                             output_dtypes=['float64'])
 
 # Subtypes transicion from present to future in RA
-ra_future_mean = xr.open_rasterio(path_files + "ARIDEZ_REG_PROMF.tif")
+ra_future_mean = xr.open_rasterio(path_files + "ARIDEZ_REG_PM.tif")
 ra_future_mean = ra_future_mean.where(ra_future_mean > 0)
 ra_future_mean = np.abs(ra_future_mean - 10) # changing order as in aridity_comparison2
 
